@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Book from './Book';
+import Book from './Books/Book';
+import Auth from './Auth/Auth';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 
 
@@ -13,6 +15,7 @@ ReactDOM.render(
     <Routes>
       <Route exact path="/home" element={<App />} />
       <Route exact path="/books" element={<Book />} />
+      <Route exact path="/auth" element={<Auth />} />
     </Routes>
   </Router>,
   document.getElementById('root')

@@ -4,6 +4,9 @@ import './Books.css';
 
 function Book() {
   const [books, setBooks] = useState([]);
+  const [newBookTitle, setNewBookTitle] = useState('');
+  const [newBookDescription, setNewBookDescription] = useState('');
+  const [newBookYear, setNewBookYear] = useState('');
 
   useEffect(() => {
     fetchBooks();
@@ -14,6 +17,39 @@ function Book() {
       const response = await axios.get('http://5.22.217.225:8081/api/v1/book/?sort_by=year&order_by=desc');
       setBooks(response.data.data); // assuming the data returned by the API is an array of book objects
       console.log(response.data); // log the response data to the console
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const handleNewBookTitleChange = (event) => {
+    setNewBookTitle(event.target.value);
+  };
+
+  const handleNewBookDescriptionChange = (event) => {
+    setNewBookDescription(event.target.value);
+  };
+
+  const handleNewBookYearChange = (event) => {
+    setNewBookYear(event.target.value);
+  };
+
+  const handleNewBookSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('http://5.22.217.225:8081/api/v1/book/', {
+        title: newBookTitle,
+        description: newBookDescription,
+        year: newBookYear,
+      });
+
+      setNewBookTitle('');
+      setNewBookDescription('');
+      setNewBookYear('');
+      fetchBooks(); // fetch the updated list of books from the API
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -44,6 +80,7 @@ function Book() {
         ))}
       </div>
     </div>
+    
   );
 }
 
