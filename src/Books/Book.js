@@ -57,6 +57,15 @@ function Book() {
 
   return (
     <div className="book-container">
+      <form onSubmit={handleNewBookSubmit}>
+        <label htmlFor="title">Title:</label>
+        <input type="text" id="title" value={newBookTitle} onChange={handleNewBookTitleChange} />
+        <label htmlFor="description">Description</label>
+        <input type="text" id="title" value={newBookDescription} onChange={handleNewBookDescriptionChange} />
+        <label htmlFor="description">Year</label>
+        <input type="text" id="title" value={newBookYear} onChange={handleNewBookYearChange} />
+        <button type="submit">Add Book</button>
+        </form>
       <h1 className="book-title">Books</h1>
       <div className="book-list">
         {books.map((book) => (
@@ -79,6 +88,8 @@ function Book() {
           </div>
         ))}
       </div>
+      <h2>Add a new book</h2>
+      
     </div>
     
   );
